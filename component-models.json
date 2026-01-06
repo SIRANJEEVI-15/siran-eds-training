@@ -216,7 +216,7 @@
     ]
   },
   {
-    "id": "teaser",
+    "id": "carousel",
     "fields": [
       {
         "component": "reference",
@@ -238,42 +238,6 @@
         "label": "Text",
         "valueType": "string",
         "required": true
-      },
-      {
-        "component": "aem-content",
-        "name": "textContent_cta",
-        "label": "CTA",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "textContent_ctaText",
-        "label": "CTA label",
-        "valueType": "string"
-      },
-      {
-        "component": "multiselect",
-        "name": "style",
-        "value": "",
-        "label": "Style",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Fade in Background",
-            "value": "fade-in"
-          },
-          {
-            "name": "Highlight",
-            "value": "highlight"
-          }
-        ]
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "backgroundImage",
-        "label": "Background Image",
-        "multi": false
       }
     ]
   }
