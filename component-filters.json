@@ -40,6 +40,7 @@
       "columns",
       "fragment",
       "quote",
+      "faq",
       "teaser",
       "carousel"
     ]
@@ -47,5 +48,11 @@
   {
     "id": "carousel",
     "components": ["carousel-cards"]
+  },
+  {
+    "id": "faq",
+    "components": [
+      "faq-item"
+    ]
   }
 ]
