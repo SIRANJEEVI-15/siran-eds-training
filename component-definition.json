@@ -192,6 +192,21 @@
               }
             }
           }
+        },
+        {
+          "title": "Carousel Cards",
+          "id": "carousel-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Carousel Cards",
+                  "model": "carousel-cards"
+                }
+              }
+            }
+          }
         }
       ]
     }

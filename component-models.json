@@ -240,5 +240,16 @@
         "required": true
       }
     ]
+  },
+  {
+    "id": "carousel-cards",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "card-title",
+        "label": "Card Title"
+      }
+    ]
   }
 ]
