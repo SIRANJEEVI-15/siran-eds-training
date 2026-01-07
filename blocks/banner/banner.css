@@ -1,4 +1,9 @@
 /* ---------- Header ---------- */
+.banner {
+    position: relative;
+    padding: 0 60px;
+}
+
 .banner-header {
     margin-bottom: 16px;
 }
@@ -33,6 +38,13 @@
     flex-wrap: nowrap;
     gap: 24px;
     overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.banner-items::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
 .banner-item {
@@ -109,4 +121,71 @@
     max-height: 200px;
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ---------- Swiper Navigation ---------- */
+.banner-swiper-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-swiper-prev,
+.banner-swiper-next {
+    position: absolute;
+    top: 50%;
+    width: 3rem;
+    height: 3rem;
+    margin-top: calc(0px - 3rem / 2);
+    border: none;
+    border-radius: 0;
+    background: rgb(255 255 255 / 10%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s ease, transform 0.2s ease;
+    padding: 0;
+    overflow: hidden;
+    clip-path: polygon(100% 0, 100% 70%, 70% 100%, 0 100%, 0 0);
+    outline: none;
+}
+
+.banner-swiper-prev:hover,
+.banner-swiper-next:hover {
+    background: rgb(255 255 255 / 30%);
+}
+
+.banner-swiper-prev:focus,
+.banner-swiper-next:focus {
+    outline: none;
+    background: rgb(255 255 255 / 10%);
+}
+
+.banner-swiper-prev:focus:hover,
+.banner-swiper-next:focus:hover {
+    background: rgb(255 255 255 / 30%);
+}
+
+.banner-swiper-prev:active,
+.banner-swiper-next:active {
+    background: rgb(255 255 255 / 20%);
+}
+
+.banner-swiper-prev:disabled,
+.banner-swiper-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.banner-swiper-prev {
+    left: 20px;
+}
+
+.banner-swiper-next {
+    right: 20px;
 }
