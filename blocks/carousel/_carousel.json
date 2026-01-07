@@ -9,23 +9,23 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Carousel",
-              "model": "carousel",
-              "filter": "carousel"
+              "filter": "carousel",
+              "model": "carousel"
             }
           }
         }
       }
     },
     {
-      "title": "Carousel Cards",
-      "id": "carousel-cards",
+      "title": "Carousel Item",
+      "id": "carousel-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Carousel Cards",
-              "model": "carousel-cards"
+              "name": "Carousel Item",
+              "model": "carousel-item"
             }
           }
         }
@@ -37,36 +37,69 @@
       "id": "carousel",
       "fields": [
         {
-          "component": "reference",
+          "component": "select",
+          "label": "Component Theme",
+          "name": "overview_component-theme",
           "valueType": "string",
-          "name": "image",
-          "label": "Image",
-          "multi": false
+          "options": [
+            {
+              "name": "Premium",
+              "value": "theme-premium"
+            },
+            {
+              "name": "Practical",
+              "value": "theme-practical"
+            },
+            {
+              "name": "Executive",
+              "value": "theme-executive"
+            },
+            {
+              "name": "Performance",
+              "value": "theme-performance"
+            },
+            {
+              "name": "Scooter",
+              "value": "theme-scooter"
+            },
+            {
+              "name": "Xoom Scooter",
+              "value": "theme-xoom-scooter"
+            }
+          ]
         },
         {
           "component": "text",
-          "valueType": "string",
-          "name": "imageAlt",
-          "label": "Image alt text",
-          "required": true
+          "name": "title",
+          "value": "",
+          "label": "Title",
+          "valueType": "string"
         },
         {
-          "component": "richtext",
-          "name": "textContent_text",
-          "label": "Text",
-          "valueType": "string",
-          "required": true
+          "component": "text",
+          "name": "subtitle",
+          "value": "",
+          "label": "Subtitle",
+          "valueType": "string"
         }
       ]
     },
     {
-      "id": "carousel-cards",
+      "id": "carousel-item",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
-          "name": "card-title",
-          "label": "Card Title"
+          "name": "carousel-question",
+          "label": "Carousel Question",
+          "required": true
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "carousel-answer",
+          "label": "Carousel Answer",
+          "required": true
         }
       ]
     }
@@ -74,9 +107,7 @@
   "filters": [
     {
       "id": "carousel",
-      "components": [
-        "carousel-cards"
-      ]
+      "components": ["carousel-item"]
     }
   ]
 }
