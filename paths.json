@@ -1,10 +1,10 @@
 {
   "mappings": [
-    "/content/siran-eds-training/:/",
-    "/content/siran-eds-training/configuration:/.helix/config.json",
-    "/content/siran-eds-training/metadata:/metadata.json"
+    "/content/siran-poc/:/",
+    "/content/siran-poc/configuration:/.helix/config.json",
+    "/content/siran-poc/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/siran-eds-training/"
+    "/content/siran-poc/"
   ]
 }
