@@ -31,6 +31,7 @@
     width: 25.375rem;
     height: 25.375rem;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .banner-item::before {
@@ -69,7 +70,7 @@
     right: 0;
     padding: 16px;
     color: #fff;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    background: linear-gradient(to top, rgb(0 0 0 / 80%), rgb(0 0 0 / 0%));
     transition: all 0.3s ease;
 }
 
@@ -99,8 +100,4 @@
     max-height: 200px;
     opacity: 1;
     transform: translateY(0);
-}
-
-.banner-item {
-    cursor: pointer;
 }

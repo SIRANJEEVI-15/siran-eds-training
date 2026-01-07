@@ -58,17 +58,13 @@ export default function decorate(block) {
 
         cell.className = 'banner-item-image';
         media.append(cell);
-      }
-
-      // TITLE
-      else if (index === 1) {
+      } else if (index === 1) {
+        // TITLE
         overlay.append(
           h3({ class: 'banner-item-title' }, cell.textContent.trim()),
         );
-      }
-
-      // DESCRIPTION
-      else if (index === 2) {
+      } else if (index === 2) {
+        // DESCRIPTION
         overlay.append(
           p({ class: 'banner-item-desc' }, cell.textContent.trim()),
         );
