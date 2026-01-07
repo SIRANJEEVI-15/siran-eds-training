@@ -155,6 +155,14 @@
     outline: none;
 }
 
+.banner-swiper-prev {
+    left: 20px;
+}
+
+.banner-swiper-next {
+    right: 20px;
+}
+
 .banner-swiper-prev:hover,
 .banner-swiper-next:hover {
     background: rgb(255 255 255 / 30%);
@@ -164,11 +172,6 @@
 .banner-swiper-next:focus {
     outline: none;
     background: rgb(255 255 255 / 10%);
-}
-
-.banner-swiper-prev:focus:hover,
-.banner-swiper-next:focus:hover {
-    background: rgb(255 255 255 / 30%);
 }
 
 .banner-swiper-prev:active,
@@ -182,10 +185,7 @@
     cursor: not-allowed;
 }
 
-.banner-swiper-prev {
-    left: 20px;
-}
-
-.banner-swiper-next {
-    right: 20px;
+.banner-swiper-prev:focus:hover,
+.banner-swiper-next:focus:hover {
+    background: rgb(255 255 255 / 30%);
 }
