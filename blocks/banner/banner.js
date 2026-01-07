@@ -7,9 +7,9 @@ export default function decorate(block) {
     ...([...block.children].map((row) => {
       const item = li();
       moveInstrumentation(row, item);
-      
+
       while (row.firstElementChild) item.append(row.firstElementChild);
-      
+
       [...item.children].forEach((child) => {
         if (child.children.length === 1 && child.querySelector('picture')) {
           child.className = 'banner-item-image';
@@ -17,7 +17,7 @@ export default function decorate(block) {
           child.className = 'banner-item-body';
         }
       });
-      
+
       return item;
     })),
   );
