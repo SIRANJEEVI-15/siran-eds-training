@@ -91,43 +91,43 @@ export default function decorate(block) {
   /* ---------------- FINAL DOM ---------------- */
   block.textContent = '';
   if (headerDiv.children.length) block.append(headerDiv);
-  
+
   // Create container with navigation buttons
   const swiperContainer = div({ class: 'banner-swiper-container' });
   const prevButton = button({ class: 'banner-swiper-prev', 'aria-label': 'Previous' }, '‹');
   const nextButton = button({ class: 'banner-swiper-next', 'aria-label': 'Next' }, '›');
-  
+
   swiperContainer.append(prevButton);
   swiperContainer.append(bannerList);
   swiperContainer.append(nextButton);
   block.append(swiperContainer);
-  
+
   // Add scroll functionality
   const scrollAmount = 450; // Approximate width of one card + gap
-  
+
   prevButton.addEventListener('click', () => {
     bannerList.scrollBy({
       left: -scrollAmount,
       behavior: 'smooth',
     });
   });
-  
+
   nextButton.addEventListener('click', () => {
     bannerList.scrollBy({
       left: scrollAmount,
       behavior: 'smooth',
     });
   });
-  
+
   // Update button states based on scroll position
   const updateButtons = () => {
     const atStart = bannerList.scrollLeft <= 0;
     const atEnd = bannerList.scrollLeft >= bannerList.scrollWidth - bannerList.clientWidth - 10;
-    
+
     prevButton.style.display = atStart ? 'none' : 'flex';
     nextButton.style.display = atEnd ? 'none' : 'flex';
   };
-  
+
   bannerList.addEventListener('scroll', updateButtons);
   // Initial check after a short delay to ensure DOM is ready
   setTimeout(updateButtons, 100);
