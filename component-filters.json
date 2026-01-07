@@ -41,13 +41,8 @@
       "fragment",
       "quote",
       "faq",
-      "teaser",
-      "carousel"
+      "teaser"
     ]
-  },
-  {
-    "id": "carousel",
-    "components": ["carousel-cards"]
   },
   {
     "id": "faq",
