@@ -1,9 +1,29 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
-import { ul, li } from '../../scripts/dom-helpers.js';
+import { ul, li, div, h2, p } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
+  // Extract header content if exists (subtitle and title)
+  const headerDiv = div({ class: 'banner-header' });
+  const firstRow = block.firstElementChild;
+  
+  if (firstRow) {
+    const cells = [...firstRow.children];
+    if (cells.length >= 2) {
+      // First cell is subtitle, second is title
+      const subtitle = cells[0]?.textContent?.trim();
+      const title = cells[1]?.textContent?.trim();
+      
+      if (subtitle) headerDiv.append(p({ class: 'banner-subtitle' }, subtitle));
+      if (title) headerDiv.append(h2({ class: 'banner-title' }, title));
+      
+      firstRow.remove();
+    }
+  }
+
+  // Create card list for banner items
   const bannerList = ul(
+    { class: 'banner-items' },
     ...([...block.children].map((row) => {
       const item = li();
       moveInstrumentation(row, item);
@@ -28,5 +48,7 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
 
-  block.replaceChildren(bannerList);
+  block.textContent = '';
+  if (headerDiv.children.length > 0) block.append(headerDiv);
+  block.append(bannerList);
 }

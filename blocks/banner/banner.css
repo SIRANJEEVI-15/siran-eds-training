@@ -1,4 +1,28 @@
-.banner > ul {
+.banner {
+  padding: 24px 0;
+}
+
+.banner .banner-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.banner .banner-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.banner .banner-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+
+.banner .banner-items {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -7,7 +31,7 @@
   gap: 24px;
 }
 
-.banner > ul > li {
+.banner .banner-items > li {
   border: 1px solid #dadada;
   background-color: var(--background-color);
 }
@@ -20,7 +44,7 @@
   line-height: 0;
 }
 
-.banner > ul > li img {
+.banner .banner-items > li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
