@@ -1,10 +1,10 @@
 {
   "mappings": [
-    "/content/siran-poc/:/",
-    "/content/siran-poc/configuration:/.helix/config.json",
-    "/content/siran-poc/metadata:/metadata.json"
+    "/content/Siran-poc/:/",
+    "/content/Siran-poc/configuration:/.helix/config.json",
+    "/content/Siran-poc/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/siran-poc/"
+    "/content/Siran-poc/"
   ]
 }
