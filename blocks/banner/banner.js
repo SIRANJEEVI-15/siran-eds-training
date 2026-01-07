@@ -74,11 +74,15 @@ export default function decorate(block) {
     media.append(overlay);
     item.append(media);
 
-    // Add click handler to show description (only if not already active)
+    // Add click handler to show description
     item.addEventListener('click', () => {
-      if (!item.classList.contains('active')) {
-        item.classList.add('active');
-      }
+      // Remove active class from all items
+      bannerList.querySelectorAll('.banner-item').forEach((i) => {
+        i.classList.remove('active');
+      });
+      
+      // Add active class to clicked item
+      item.classList.add('active');
     });
 
     bannerList.append(item);
