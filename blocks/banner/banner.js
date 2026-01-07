@@ -80,7 +80,7 @@ export default function decorate(block) {
       bannerList.querySelectorAll('.banner-item').forEach((i) => {
         i.classList.remove('active');
       });
-      
+
       // Add active class to clicked item
       item.classList.add('active');
     });

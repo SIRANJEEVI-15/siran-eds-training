@@ -4,24 +4,24 @@
 }
 
 .banner-subtitle {
-    font-family: "TSTAR-PRO-Bold";
+    font-family: TSTAR-PRO-Bold, sans-serif;
     font-weight: 900;
     font-size: 1.5rem;
     line-height: 100%;
     letter-spacing: 6%;
     text-transform: uppercase;
     color: red;
-    margin: 0 0 8px 0;
+    margin: 0 0 8px;
 }
 
 .banner-title {
     color: #303030;
-    font-family: "TRANSDUCER-Regular";
+    font-family: TRANSDUCER-Regular, sans-serif;
     font-weight: 400;
     font-size: 3.5rem;
     line-height: 100%;
     letter-spacing: 0;
-    margin: 0 0 30px 0;
+    margin: 0 0 30px;
 }
 
 /* ---------- Banner Items ---------- */
