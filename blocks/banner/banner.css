@@ -53,6 +53,7 @@
     height: 25.375rem;
     flex-shrink: 0;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .banner-item::before {
