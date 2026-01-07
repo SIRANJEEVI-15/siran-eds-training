@@ -442,8 +442,8 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
+        "name": "video",
+        "label": "Video",
         "multi": false
       },
       {
