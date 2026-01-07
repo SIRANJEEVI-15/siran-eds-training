@@ -20,15 +20,17 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25.375rem, 1fr));
+    display: flex;
+    flex-wrap: nowrap;
     gap: 24px;
+    overflow-x: auto;
 }
 
 .banner-item {
     position: relative;
     width: 25.375rem;
     height: 25.375rem;
+    flex-shrink: 0;
 }
 
 .banner-item::before {
