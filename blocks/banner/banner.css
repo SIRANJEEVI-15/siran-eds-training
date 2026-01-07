@@ -1,51 +1,104 @@
-.banner {
-  padding: 24px 0;
+/* ---------- Header ---------- */
+.banner-header {
+    margin-bottom: 16px;
 }
 
-.banner .banner-header {
-  text-align: center;
-  margin-bottom: 32px;
+.banner-subtitle {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0 0 4px;
 }
 
-.banner .banner-subtitle {
-  font-size: 16px;
-  color: #666;
-  margin: 0 0 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.banner-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
 }
 
-.banner .banner-title {
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0;
-  color: #000;
+/* ---------- Banner Items ---------- */
+.banner-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25.375rem, 1fr));
+    gap: 24px;
 }
 
-.banner .banner-items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+.banner-item {
+    position: relative;
+    width: 25.375rem;
+    height: 25.375rem;
 }
 
-.banner .banner-items > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+.banner-item::before {
+    right: -1.625rem;
+    display: block;
+    content: "";
+    position: absolute;
+    width: 3.125rem;
+    height: 3.125rem;
+    background: #fff;
+    z-index: 5;
+    bottom: -1.625rem;
+    transform: rotate(44deg);
 }
 
-.banner .banner-item-body {
-  margin: 16px;
+.banner-media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
-.banner .banner-item-image {
-  line-height: 0;
+.banner-item-image picture,
+.banner-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.banner .banner-items > li img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+/* ---------- Overlay ---------- */
+.banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    transition: all 0.3s ease;
+}
+
+.banner-item-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    transition: margin 0.3s ease;
+}
+
+.banner-item.active .banner-item-title {
+    margin-bottom: 12px;
+}
+
+.banner-item-desc {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.banner-item.active .banner-item-desc {
+    max-height: 200px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.banner-item {
+    cursor: pointer;
 }

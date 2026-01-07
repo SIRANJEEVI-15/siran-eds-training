@@ -1,56 +1,93 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
-import {
-  ul, li, div, h2, p,
-} from '../../scripts/dom-helpers.js';
+import { createOptimizedPicture } from "../../scripts/aem.js";
+import { moveInstrumentation } from "../../scripts/scripts.js";
+import { ul, li, div, h2, h3, p } from "../../scripts/dom-helpers.js";
 
 export default function decorate(block) {
-  // Extract header content if exists (subtitle and title)
-  const headerDiv = div({ class: 'banner-header' });
+  /* ---------------- HEADER ---------------- */
+  const headerDiv = div({ class: "banner-header" });
+  
+  // First row is subtitle (single cell)
   const firstRow = block.firstElementChild;
-
-  if (firstRow) {
-    const cells = [...firstRow.children];
-    if (cells.length >= 2) {
-      // First cell is subtitle, second is title
-      const subtitle = cells[0]?.textContent?.trim();
-      const title = cells[1]?.textContent?.trim();
-
-      if (subtitle) headerDiv.append(p({ class: 'banner-subtitle' }, subtitle));
-      if (title) headerDiv.append(h2({ class: 'banner-title' }, title));
-
-      firstRow.remove();
-    }
+  let subtitle = '';
+  let title = '';
+  
+  if (firstRow && firstRow.children.length === 1 && !firstRow.querySelector('picture')) {
+    subtitle = firstRow.textContent.trim();
+    firstRow.remove();
+  }
+  
+  // Second row is title (single cell)
+  const secondRow = block.firstElementChild;
+  if (secondRow && secondRow.children.length === 1 && !secondRow.querySelector('picture')) {
+    title = secondRow.textContent.trim();
+    secondRow.remove();
   }
 
-  // Create card list for banner items
-  const bannerList = ul(
-    { class: 'banner-items' },
-    ...([...block.children].map((row) => {
-      const item = li();
-      moveInstrumentation(row, item);
+  if (subtitle) headerDiv.append(p({ class: "banner-subtitle" }, subtitle));
+  if (title) headerDiv.append(h2({ class: "banner-title" }, title));
 
-      while (row.firstElementChild) item.append(row.firstElementChild);
+  /* ---------------- BANNER ITEMS ---------------- */
+  const bannerList = ul({ class: "banner-items" });
 
-      [...item.children].forEach((child) => {
-        if (child.children.length === 1 && child.querySelector('picture')) {
-          child.className = 'banner-item-image';
-        } else {
-          child.className = 'banner-item-body';
-        }
-      });
+  [...block.children].forEach((row) => {
+    const item = li({ class: "banner-item" });
+    moveInstrumentation(row, item);
 
-      return item;
-    })),
-  );
+    const cells = [...row.children];
+    row.remove();
 
-  bannerList.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    moveInstrumentation(img, optimizedPic.querySelector('img'));
-    img.closest('picture').replaceWith(optimizedPic);
+    const media = div({ class: "banner-media" });
+    const overlay = div({ class: "banner-overlay" });
+
+    cells.forEach((cell, index) => {
+      // IMAGE CELL
+      if (cell.querySelector("picture")) {
+        const img = cell.querySelector("img");
+
+        const optimizedPicture = createOptimizedPicture(
+          img.src,
+          img.alt,
+          false,
+          [{ width: "750" }]
+        );
+
+        moveInstrumentation(img, optimizedPicture.querySelector("img"));
+        cell.querySelector("picture").replaceWith(optimizedPicture);
+
+        cell.className = "banner-item-image";
+        media.append(cell);
+      }
+
+      // TITLE
+      else if (index === 1) {
+        overlay.append(
+          h3({ class: "banner-item-title" }, cell.textContent.trim())
+        );
+      }
+
+      // DESCRIPTION
+      else if (index === 2) {
+        overlay.append(
+          p({ class: "banner-item-desc" }, cell.textContent.trim())
+        );
+      }
+    });
+
+    media.append(overlay);
+    item.append(media);
+    
+    // Add click handler to show description (only if not already active)
+    item.addEventListener('click', () => {
+      if (!item.classList.contains('active')) {
+        item.classList.add('active');
+      }
+    });
+    
+    bannerList.append(item);
   });
 
-  block.textContent = '';
-  if (headerDiv.children.length > 0) block.append(headerDiv);
+  /* ---------------- FINAL DOM ---------------- */
+  block.textContent = "";
+  if (headerDiv.children.length) block.append(headerDiv);
   block.append(bannerList);
 }
