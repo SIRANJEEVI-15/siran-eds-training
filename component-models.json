@@ -216,7 +216,7 @@
     ]
   },
   {
-    "id": "faq",
+    "id": "banner",
     "fields": [
       {
         "component": "select",
@@ -267,20 +267,20 @@
     ]
   },
   {
-    "id": "faq-item",
+    "id": "banner-item",
     "fields": [
       {
         "component": "text",
         "valueType": "string",
-        "name": "faq-question",
-        "label": "FAQ  Question",
+        "name": "banner-question",
+        "label": "Banner Question",
         "required": true
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "faq-answer",
-        "label": "FAQ  Answer",
+        "name": "banner-answer",
+        "label": "Banner Answer",
         "required": true
       }
     ]

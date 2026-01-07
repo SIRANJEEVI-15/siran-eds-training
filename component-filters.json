@@ -40,14 +40,14 @@
       "columns",
       "fragment",
       "quote",
-      "faq",
+      "banner",
       "teaser"
     ]
   },
   {
-    "id": "faq",
+    "id": "banner",
     "components": [
-      "faq-item"
+      "banner-item"
     ]
   }
 ]
