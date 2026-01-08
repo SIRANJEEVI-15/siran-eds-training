@@ -11,7 +11,7 @@ export default function decorate(block) {
   const firstRow = block.firstElementChild;
   let subtitle = '';
   let title = '';
-  let buttonText = 'BUY NOW'; // Default value
+  let buttonText = '';
 
   if (firstRow && firstRow.children.length === 1 && !firstRow.querySelector('picture')) {
     subtitle = firstRow.textContent.trim();
