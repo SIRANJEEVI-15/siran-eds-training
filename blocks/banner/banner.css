@@ -94,7 +94,7 @@
     right: 0;
     padding: 16px;
     color: #fff;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, rgb(0 0 0 / 70%), transparent);
     transition: all 0.3s ease;
 }
 

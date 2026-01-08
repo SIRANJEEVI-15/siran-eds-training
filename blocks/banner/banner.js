@@ -48,39 +48,31 @@ export default function decorate(block) {
     const overlay = div({ class: 'banner-overlay' });
 
     cells.forEach((cell, index) => {
-      console.log("cell", cell);
-      
       // VIDEO CELL - Check for video element directly or video link in button container
       const existingVideo = cell.querySelector('video');
       const videoLink = cell.querySelector('a[href*=".mp4"], a[href*=".webm"], a[href*=".ogg"]');
-      
-      console.log("existingVideo:", existingVideo);
-      console.log("videoLink:", videoLink);
-       
+
       if (existingVideo) {
         // Video element already exists (from Universal Editor)
         const originalSrc = existingVideo.src || existingVideo.getAttribute('src');
-        console.log("Original video src:", originalSrc);
-        
+
         // Transform the src if it contains AEM paths
         if (originalSrc) {
           const transformedSrc = transformUrl(originalSrc);
-          console.log("Transformed video src:", transformedSrc);
           existingVideo.src = transformedSrc;
         }
-        
+
         existingVideo.setAttribute('playsinline', '');
         existingVideo.setAttribute('muted', '');
         existingVideo.setAttribute('loop', '');
         existingVideo.setAttribute('autoplay', '');
         existingVideo.className = 'banner-item-video';
-        
+
         cell.className = 'banner-item-media';
         media.append(cell);
       } else if (videoLink) {
         // Create video from link
         const videoUrl = transformUrl(videoLink.href);
-        console.log("Creating video from link:", videoUrl);
         const video = document.createElement('video');
         video.src = videoUrl;
         video.muted = true;
@@ -89,22 +81,18 @@ export default function decorate(block) {
         video.playsInline = true;
         video.className = 'banner-item-video';
         video.controls = false;
-        
+
         // Error handling
-        video.addEventListener('error', (e) => {
-          console.error('Video error:', e);
-          console.error('Video error code:', video.error?.code);
-          console.error('Video error message:', video.error?.message);
-          console.error('Failed video src:', video.src);
+        video.addEventListener('error', () => {
+          // Video failed to load - silently handle
         });
-        
+
         video.addEventListener('loadeddata', () => {
-          console.log('Video loaded successfully:', videoUrl);
-          video.play().catch((err) => {
-            console.error('Video play error:', err);
+          video.play().catch(() => {
+            // Video play failed - silently handle
           });
         });
-        
+
         cell.innerHTML = '';
         cell.className = 'banner-item-media';
         cell.append(video);
@@ -206,12 +194,12 @@ export default function decorate(block) {
   // Create bullet for each banner item
   const items = bannerList.querySelectorAll('.banner-item');
   items.forEach((_, index) => {
-    const bullet = button({ 
+    const bullet = button({
       class: 'banner-pagination-bullet',
       'aria-label': `Go to slide ${index + 1}`,
-      'data-index': index 
+      'data-index': index,
     });
-    
+
     // Click to navigate to specific item
     bullet.addEventListener('click', () => {
       const itemWidth = items[0].offsetWidth;
@@ -221,7 +209,7 @@ export default function decorate(block) {
         behavior: 'smooth',
       });
     });
-    
+
     paginationBullets.append(bullet);
   });
 
@@ -232,9 +220,9 @@ export default function decorate(block) {
   const updatePagination = () => {
     const itemWidth = items[0].offsetWidth;
     const gap = 24;
-    const scrollLeft = bannerList.scrollLeft;
+    const { scrollLeft } = bannerList;
     const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
-    
+
     paginationBullets.querySelectorAll('.banner-pagination-bullet').forEach((bullet, index) => {
       bullet.classList.toggle('active', index === currentIndex);
     });
