@@ -5,6 +5,12 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
+  const transformUrl = (url) => {
+    if (!url) return url;
+    const urlStr = url.toString();
+    return urlStr.replace(/^(https?:\/\/[^/]+)?\/content\/dam\/aem-eds-website\//, '/');
+  };
+
   /* ---------------- HEADER ---------------- */
   const headerDiv = div({ class: 'banner-header' });
 
@@ -42,8 +48,69 @@ export default function decorate(block) {
     const overlay = div({ class: 'banner-overlay' });
 
     cells.forEach((cell, index) => {
-      // IMAGE CELL
-      if (cell.querySelector('picture')) {
+      console.log("cell", cell);
+      
+      // VIDEO CELL - Check for video element directly or video link in button container
+      const existingVideo = cell.querySelector('video');
+      const videoLink = cell.querySelector('a[href*=".mp4"], a[href*=".webm"], a[href*=".ogg"]');
+      
+      console.log("existingVideo:", existingVideo);
+      console.log("videoLink:", videoLink);
+       
+      if (existingVideo) {
+        // Video element already exists (from Universal Editor)
+        const originalSrc = existingVideo.src || existingVideo.getAttribute('src');
+        console.log("Original video src:", originalSrc);
+        
+        // Transform the src if it contains AEM paths
+        if (originalSrc) {
+          const transformedSrc = transformUrl(originalSrc);
+          console.log("Transformed video src:", transformedSrc);
+          existingVideo.src = transformedSrc;
+        }
+        
+        existingVideo.setAttribute('playsinline', '');
+        existingVideo.setAttribute('muted', '');
+        existingVideo.setAttribute('loop', '');
+        existingVideo.setAttribute('autoplay', '');
+        existingVideo.className = 'banner-item-video';
+        
+        cell.className = 'banner-item-media';
+        media.append(cell);
+      } else if (videoLink) {
+        // Create video from link
+        const videoUrl = transformUrl(videoLink.href);
+        console.log("Creating video from link:", videoUrl);
+        const video = document.createElement('video');
+        video.src = videoUrl;
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.className = 'banner-item-video';
+        video.controls = false;
+        
+        // Error handling
+        video.addEventListener('error', (e) => {
+          console.error('Video error:', e);
+          console.error('Video error code:', video.error?.code);
+          console.error('Video error message:', video.error?.message);
+          console.error('Failed video src:', video.src);
+        });
+        
+        video.addEventListener('loadeddata', () => {
+          console.log('Video loaded successfully:', videoUrl);
+          video.play().catch((err) => {
+            console.error('Video play error:', err);
+          });
+        });
+        
+        cell.innerHTML = '';
+        cell.className = 'banner-item-media';
+        cell.append(video);
+        media.append(cell);
+      } else if (cell.querySelector('picture')) {
+        // IMAGE CELL (fallback)
         const img = cell.querySelector('img');
 
         const optimizedPicture = createOptimizedPicture(
@@ -131,4 +198,49 @@ export default function decorate(block) {
   bannerList.addEventListener('scroll', updateButtons);
   // Initial check after a short delay to ensure DOM is ready
   setTimeout(updateButtons, 100);
+
+  // Create pagination swiper below the container
+  const paginationSwiper = div({ class: 'banner-pagination-swiper' });
+  const paginationBullets = div({ class: 'banner-pagination-bullets' });
+
+  // Create bullet for each banner item
+  const items = bannerList.querySelectorAll('.banner-item');
+  items.forEach((_, index) => {
+    const bullet = button({ 
+      class: 'banner-pagination-bullet',
+      'aria-label': `Go to slide ${index + 1}`,
+      'data-index': index 
+    });
+    
+    // Click to navigate to specific item
+    bullet.addEventListener('click', () => {
+      const itemWidth = items[0].offsetWidth;
+      const gap = 24; // Match the gap in CSS
+      bannerList.scrollTo({
+        left: index * (itemWidth + gap),
+        behavior: 'smooth',
+      });
+    });
+    
+    paginationBullets.append(bullet);
+  });
+
+  paginationSwiper.append(paginationBullets);
+  block.append(paginationSwiper);
+
+  // Update active bullet based on scroll position
+  const updatePagination = () => {
+    const itemWidth = items[0].offsetWidth;
+    const gap = 24;
+    const scrollLeft = bannerList.scrollLeft;
+    const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+    
+    paginationBullets.querySelectorAll('.banner-pagination-bullet').forEach((bullet, index) => {
+      bullet.classList.toggle('active', index === currentIndex);
+    });
+  };
+
+  bannerList.addEventListener('scroll', updatePagination);
+  // Initial active state
+  setTimeout(updatePagination, 100);
 }
