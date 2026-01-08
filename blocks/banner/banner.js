@@ -5,9 +5,7 @@ import {
 } from '../../scripts/dom-helpers.js';
 
 export default function decorate(block) {
-  const transformUrl = (url) => {
-    return `https://dev1.heromotocorp.com${url}`;
-   };
+  const transformUrl = (url) => `https://dev1.heromotocorp.com${url}`;
 
   /* ---------------- HEADER ---------------- */
   const headerDiv = div({ class: 'banner-header' });
@@ -46,9 +44,6 @@ export default function decorate(block) {
     const overlay = div({ class: 'banner-overlay' });
 
     cells.forEach((cell, index) => {
-      console.log("cell", cell);
-      // return;
-      
       // VIDEO CELL - Check for video element directly or video link in button container
       const existingVideo = cell.querySelector('video');
       const videoLink = cell.querySelector('a[href*=".mp4"], a[href*=".webm"], a[href*=".ogg"]');
@@ -73,8 +68,6 @@ export default function decorate(block) {
         media.append(cell);
       } else if (videoLink) {
         // Create video from link
-        console.log("videoLink", videoLink);
-        
         const videoUrl = transformUrl(videoLink.textContent.trim());
         const video = document.createElement('video');
         video.src = videoUrl;
