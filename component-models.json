@@ -479,6 +479,13 @@
         "value": "",
         "label": "Subtitle",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "button-text",
+        "value": "BUY NOW",
+        "label": "Button Text",
+        "valueType": "string"
       }
     ]
   },
