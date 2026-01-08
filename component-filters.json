@@ -17,7 +17,8 @@
       "carousel",
       "quote",
       "banner",
-      "teaser"
+      "teaser",
+      "buy"
     ]
   },
   {
@@ -39,5 +40,9 @@
   {
     "id": "column",
     "components": ["text", "image", "button", "title"]
+  },
+  {
+    "id": "buy",
+    "components": ["buy-item"]
   }
 ]

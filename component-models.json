@@ -461,5 +461,83 @@
         "required": true
       }
     ]
+  },
+
+  {
+    "id": "buy",
+    "fields": [
+      {
+        "component": "select",
+        "label": "Component Theme",
+        "name": "overview_component-theme",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Premium",
+            "value": "theme-premium"
+          },
+          {
+            "name": "Practical",
+            "value": "theme-practical"
+          },
+          {
+            "name": "Executive",
+            "value": "theme-executive"
+          },
+          {
+            "name": "Performance",
+            "value": "theme-performance"
+          },
+          {
+            "name": "Scooter",
+            "value": "theme-scooter"
+          },
+          {
+            "name": "Xoom Scooter",
+            "value": "theme-xoom-scooter"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "subtitle",
+        "value": "",
+        "label": "Subtitle",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "buy-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buy-title",
+        "label": "Buy Title",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buy-description",
+        "label": "Buy Description",
+        "required": true
+      }
+    ]
   }
 ]
