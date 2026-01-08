@@ -6,10 +6,8 @@ import {
 
 export default function decorate(block) {
   const transformUrl = (url) => {
-    if (!url) return url;
-    const urlStr = url.toString();
-    return urlStr.replace(/^(https?:\/\/[^/]+)?\/content\/dam\/aem-eds-website\//, '/');
-  };
+    return `https://dev1.heromotocorp.com${url}`;
+   };
 
   /* ---------------- HEADER ---------------- */
   const headerDiv = div({ class: 'banner-header' });
@@ -48,6 +46,9 @@ export default function decorate(block) {
     const overlay = div({ class: 'banner-overlay' });
 
     cells.forEach((cell, index) => {
+      console.log("cell", cell);
+      // return;
+      
       // VIDEO CELL - Check for video element directly or video link in button container
       const existingVideo = cell.querySelector('video');
       const videoLink = cell.querySelector('a[href*=".mp4"], a[href*=".webm"], a[href*=".ogg"]');
@@ -72,7 +73,9 @@ export default function decorate(block) {
         media.append(cell);
       } else if (videoLink) {
         // Create video from link
-        const videoUrl = transformUrl(videoLink.href);
+        console.log("videoLink", videoLink);
+        
+        const videoUrl = transformUrl(videoLink.textContent.trim());
         const video = document.createElement('video');
         video.src = videoUrl;
         video.muted = true;
