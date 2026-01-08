@@ -189,7 +189,7 @@ export default function decorate(block) {
 
   // Create bullet for each banner item
   const items = bannerList.querySelectorAll('.banner-item');
-  items.forEach((_, index) => {
+  items.forEach((item, index) => {
     const bullet = button({
       class: 'banner-pagination-bullet',
       'aria-label': `Go to slide ${index + 1}`,
@@ -198,10 +198,10 @@ export default function decorate(block) {
 
     // Click to navigate to specific item
     bullet.addEventListener('click', () => {
-      const itemWidth = items[0].offsetWidth;
-      const gap = 24; // Match the gap in CSS
+      // Calculate exact scroll position based on item's actual position
+      const targetScrollLeft = item.offsetLeft - bannerList.offsetLeft;
       bannerList.scrollTo({
-        left: index * (itemWidth + gap),
+        left: targetScrollLeft,
         behavior: 'smooth',
       });
     });
