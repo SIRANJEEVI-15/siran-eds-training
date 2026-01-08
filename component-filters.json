@@ -1,9 +1,7 @@
 [
   {
     "id": "main",
-    "components": [
-      "section"
-    ]
+    "components": ["section"]
   },
   {
     "id": "section",
@@ -17,50 +15,29 @@
       "columns",
       "fragment",
       "carousel",
+      "quote",
       "banner",
-      "buy"
+      "teaser"
     ]
+  },
+  {
+    "id": "banner",
+    "components": ["banner-item"]
   },
   {
     "id": "cards",
-    "components": [
-      "card"
-    ]
+    "components": ["card"]
   },
   {
     "id": "carousel",
-    "components": [
-      "carousel-item"
-    ]
+    "components": ["carousel-item"]
   },
   {
     "id": "columns",
-    "components": [
-      "column"
-    ]
+    "components": ["column"]
   },
   {
     "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
-  },
-  {
-    "id": "section",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title",
-      "hero",
-      "cards",
-      "columns",
-      "fragment",
-      "quote",
-      "teaser"
-    ]
+    "components": ["text", "image", "button", "title"]
   }
 ]
